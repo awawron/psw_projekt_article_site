@@ -1,0 +1,12 @@
+.preview-table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.article-preview {
+    width: 40%;
+    height: 40%;
+    float: left;
+    margin: 10px;
+}
+  
