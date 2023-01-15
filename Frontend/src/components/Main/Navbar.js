@@ -19,20 +19,30 @@ const Navbar = () => {
 
     return (
         <nav>
-            <h2 className="logo">ArticleSuperSite</h2>
-            <Link to={"/"} className="nav-item">Home</Link>
-            <form>
-            <input type="text" placeholder="Search..." className="search-input" />
-            <button type="submit" className="search-button">Search</button>
-            </form>
-            {isLoggedIn ? (
-            <>
-                <Link to={`/profile/${user.id}`} className="nav-item">{user.username}</Link>
-                <Link to={'/'} onClick={logout} className="nav-item">Logout</Link>
-            </>
-            ) : (
-            <Link to={'/login'} className="nav-item">Login</Link>
-            )}
+            <ul className='nav-list'>
+                <li className='nav-title'>
+                    <h2 className="logo">ArticleSuperSite</h2>
+                </li>
+                <li className='nav-item'>
+                    <Link to={"/"} className="nav-item">Home</Link>
+                </li>
+                <li className='nav-item'>
+                    <form className='search-form'>
+                        <input type="text" placeholder="Search..." className="search-input" />
+                        <button type="submit" className="search-button">Search</button>
+                    </form>
+                </li>
+                {isLoggedIn ? (
+                    <li className='nav-item'>
+                        <Link to={`/profile/${user.id}`} className="nav-item">{user.username}</Link>
+                        <Link to={'/'} onClick={logout} className="nav-item">Logout</Link>
+                    </li>
+                ) : (
+                    <li className='nav-item'>
+                        <Link to={'/login'} className="nav-item">Login</Link>
+                    </li>
+                )}
+            </ul>
         </nav>
     );
 };

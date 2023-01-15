@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './components/Main/HomePage';
 import LoginPage from './components/Profile/LoginPage';
@@ -14,15 +14,17 @@ const PageNotFound = ({ location }) => (
 
 const App = () => {
   return (
-    <div>
+    <div className='all'>
       <Navbar />
-      <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile/:username" element={<ProfilePage />} />
-        <Route path="/articles/:id" element={<ArticlePage />} />
-        <Route path="*" element={<PageNotFound location={useLocation()} />} />
-      </Routes>
+      <div className='body'>
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route path="/articles/:id" element={<ArticlePage />} />
+          <Route path="*" element={<PageNotFound location={useLocation()} />} />
+        </Routes>
+      </div>
     </div>
   );
 }
