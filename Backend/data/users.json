@@ -1,0 +1,39 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "normaluser1",
+            "email": "user1@email.com",
+            "password": "safepassword1",
+            "clearance": 0
+        },
+        {
+            "id": 2,
+            "username": "normaluser2",
+            "email": "user2@email.com",
+            "password": "safepassword2",
+            "clearance": 0
+        },
+        {
+            "id": 11,
+            "username": "author1",
+            "email": "author1@email.com",
+            "password": "author1",
+            "clearance": 1
+        },
+        {
+            "id": 12,
+            "username": "author2",
+            "email": "author2@email.com",
+            "password": "author2",
+            "clearance": 1
+        },
+        {
+            "id": 101,
+            "username": "admin1",
+            "email": "admin1@email.com",
+            "password": "1234",
+            "clearance": 2
+        }
+    ]
+}
