@@ -1,7 +1,8 @@
 import React from 'react';
-import { createContext, useState } from 'react';
-import { Input, checkEmpty, checkEmail } from './Functions.js';
+import { createContext, useState, useContext } from 'react';
+import { checkEmpty, checkEmail } from './Functions.js';
 
+// This context contains errors for all the inputs
 export const ErrorContext = createContext([]);
 
 export function SignUp() {
@@ -73,3 +74,22 @@ export function SignUp() {
   );
 }
 
+function Input({ label, type, value, onchangeFunc, errorFunc }) {
+  const { error, setError } = useContext(ErrorContext);
+
+  return (
+    <label>
+      {label}
+      {': '}
+      <input
+        type={type}
+        required
+        value={value}
+        onChange={(e) => {
+          onchangeFunc(e.target.value);
+          setError(errorFunc(e.target.value, label, error));
+        }}
+      ></input>
+    </label>
+  );
+}

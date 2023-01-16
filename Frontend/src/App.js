@@ -1,5 +1,5 @@
 import './App.scss';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import HomePage from './components/Main/HomePage';
 import LoginPage from './components/Profile/LoginPage';
 import ProfilePage from './components/Profile/ProfilePage';
@@ -18,7 +18,8 @@ const App = () => {
       <Navbar />
       <div className='body'>
         <Routes>
-          <Route path="/" exact element={<HomePage />} />
+          <Route path="/" element={<Navigate to="/home" /> }/>
+          <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />

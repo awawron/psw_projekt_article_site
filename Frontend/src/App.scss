@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 body {
     background-color: black;
     color: white;
@@ -64,4 +68,12 @@ a {
     border: solid white 2px;
     vertical-align: top;
 }
-  
+
+.preview-table {
+    width: 100%;
+}
+
+.article-preview {
+    width: 50%;
+    text-align: center;
+}

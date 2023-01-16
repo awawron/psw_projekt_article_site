@@ -1,26 +1,10 @@
 import { useContext } from "react";
-import { ErrorContext } from "./SignUp";
 
-export function Input({ label, type, value, onchangeFunc, errorFunc }) {
-  const { error, setError } = useContext(ErrorContext);
+// These are some helper functions and components for signin/signup and profile page
 
-  return (
-    <label>
-      {label}
-      {': '}
-      <input
-        type={type}
-        required
-        value={value}
-        onChange={(e) => {
-          onchangeFunc(e.target.value);
-          setError(errorFunc(e.target.value, label, error));
-        }}
-      ></input>
-    </label>
-  );
-}
+// This component provides an easy way of creating input fields for handling user data
 
+// This function checks whether there is anything in the given input and updates the error array accordingly
 export function checkEmpty(value, label, errorArr) {
   const errmsg = label + ' too short';
   if (value.length <= 0) {
@@ -33,6 +17,7 @@ export function checkEmpty(value, label, errorArr) {
   return errorArr;
 }
 
+// This function checks whether the email is valid (within reason) and updates the error array accordingly
 export function checkEmail(value, label, errorArr) {
   const errmsg = 'Email incorrect';
   const check = value.match(

@@ -1,18 +1,32 @@
 import React from 'react';
-import { createContext, useState } from 'react';
-import { Input, checkEmpty } from './Functions.js';
+import { createContext, useState, useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { checkEmpty } from './Functions.js';
+import axios from "axios"
 
-const ErrorContext = createContext([]);
+// This context contains errors for all the inputs
+export const ErrorContext = createContext([]);
 
 export function Login() {
+  const navigate = useNavigate()
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const defaultErrors = ['Username too short', 'Password too short'];
   const [error, setError] = useState(defaultErrors);
 
-  function handleLogin(username, password) {
-    // TODO
-    // Handle login request
+  const handleLogin = async (username, password) => {
+    axios.post("/login", { username, password })
+      .then(res => {
+        console.log(res.data)
+        if(res.data.message === 'Login successful') {
+          console.log("baaaaaa")
+          navigate('/')
+        }
+        else {
+          window.alert(res.data.message)
+        }
+      })
   }
 
   const canLogin = error.length === 0;
@@ -57,5 +71,25 @@ export function Login() {
         })}
       </ul>
     </ErrorContext.Provider>
+  );
+}
+
+function Input({ label, type, value, onchangeFunc, errorFunc }) {
+  const { error, setError } = useContext(ErrorContext);
+
+  return (
+    <label>
+      {label}
+      {': '}
+      <input
+        type={type}
+        required
+        value={value}
+        onChange={(e) => {
+          onchangeFunc(e.target.value);
+          setError(errorFunc(e.target.value, label, error));
+        }}
+      ></input>
+    </label>
   );
 }

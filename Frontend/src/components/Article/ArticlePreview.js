@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios"
 
-const ArticlePreview = ({ id }) => {
-  const [article, setArticle] = useState({});
+const ArticlePreview = ({ a }) => {
+  const checkEmpty = (article) => {
+    if (article === {} || article === undefined) {
+      return (
+        <div>
+          <h2>Loading title...</h2>
+          <p>Loading summary...</p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h2>{article.title}</h2>
+          <p>{article.summary}</p>
+        </div>
+      )
+    }
+  }
 
-  useEffect(() => {
-    // axios.get(`/articles/${id}`)
-    // .then(res => res.json())
-    // .then(data => setArticle(data));
-  }, []);
-
-  return (
-    <div>
-      <h2>{article.title}</h2>
-      <p>{article.summary}</p>
-    </div>
-  );
+  return checkEmpty(a)
 };
 
 export default ArticlePreview

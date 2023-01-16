@@ -1,9 +1,9 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 const logout = () => {
-    // TODO
-    // Axios sends the logout message
+    axios.get("/logout")
 }
 
 // The navbar is constantly present in the top of the page.
