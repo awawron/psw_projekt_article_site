@@ -15,13 +15,11 @@ const Navbar = () => {
 
     useEffect(() => {
         const checkUser = async () => {
-            
+            const cook = Cookies.get('user')
+            return cook
         }
 
-        const cook = Cookies.get('user')
-        setUser(cook)
-        console.log(user)
-        console.log(cook)
+        checkUser().then(us => {setUser(us); console.log(us)})
     }, []);
 
     const handleDeleteCookie = () => {
