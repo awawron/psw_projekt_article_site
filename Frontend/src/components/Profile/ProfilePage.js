@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Navbar from "../Main/Navbar";
 
 const ProfilePage = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -10,9 +11,12 @@ const ProfilePage = () => {
         // If not redirect to login
     }, []);
 
-    return (<div>
-        <h2>Your profile here</h2>
-    </div>)
+    return (
+        <div>
+            <Navbar />
+            <h2>Your profile here</h2>
+        </div>
+    )
 }
 
 export default ProfilePage

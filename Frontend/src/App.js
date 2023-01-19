@@ -14,8 +14,6 @@ const PageNotFound = ({ location }) => (
 
 const App = () => {
   return (
-    <div className='all'>
-      <Navbar />
       <div className='body'>
         <Routes>
           <Route path="/" element={<Navigate to="/home" /> }/>
@@ -26,7 +24,6 @@ const App = () => {
           <Route path="*" element={<PageNotFound location={useLocation()} />} />
         </Routes>
       </div>
-    </div>
   );
 }
 

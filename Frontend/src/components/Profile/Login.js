@@ -18,9 +18,7 @@ export function Login() {
   const handleLogin = async (username, password) => {
     axios.post("/login", { username, password })
       .then(res => {
-        console.log(res.data)
         if(res.data.message === 'Login successful') {
-          console.log("baaaaaa")
           navigate('/')
         }
         else {

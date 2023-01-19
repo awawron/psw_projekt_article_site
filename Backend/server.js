@@ -23,8 +23,8 @@ app.post("/login", (req, res) => {
     if(verified === true) {
         res.cookie('user', username, {
             maxAge: 1800000, // 30 minutes in milliseconds
-            httpOnly: true,
-            signed: true // encrypt the cookie
+            httpOnly: false,
+            signed: false // encrypt the cookie
         });
         res.send({ message: 'Login successful' });
     }
@@ -35,7 +35,7 @@ app.post("/login", (req, res) => {
 
 app.get("/logout", (req, res) => {
     console.log("logout initiated")
-    res.clearCookie('username')
+    res.clearCookie('user')
     res.send({ message: "Logged out" })
 })
 

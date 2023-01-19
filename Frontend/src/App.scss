@@ -7,6 +7,10 @@ body {
     color: white;
 }
 
+.page {
+    margin-top: 8rem;
+}
+
 .body {
     margin-left: 3rem;
     margin-right: 3rem;
@@ -25,6 +29,10 @@ body {
 }
 
 nav {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
     padding: .1rem;
     background-color: rgb(0, 0, 121);
     color: white;
