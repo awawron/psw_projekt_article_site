@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, redirect } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 const logout = () => {
     axios.get("/logout")
@@ -13,9 +14,19 @@ const Navbar = () => {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        // TODO
-        // Check the cookie for if the user is logged in
+        const checkUser = async () => {
+            
+        }
+
+        const cook = Cookies.get('user')
+        setUser(cook)
+        console.log(user)
+        console.log(cook)
     }, []);
+
+    const handleDeleteCookie = () => {
+        axios.get('/logout').then(res => window.alert(res.message))
+    }
 
     return (
         <nav>
@@ -31,6 +42,9 @@ const Navbar = () => {
                         <input type="text" placeholder="Search..." className="search-input" />
                         <button type="submit" className="search-button">Search</button>
                     </form>
+                </li>
+                <li className='nav-item'>
+                    <button onClick={handleDeleteCookie}>Delete cookie</button>
                 </li>
                 {isLoggedIn ? (
                     <li className='nav-item'>
