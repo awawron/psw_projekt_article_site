@@ -13,7 +13,7 @@ const port = 3333;
 
 app.get("/home", (req, res) => {
     const articles = articleFunctions.getArticles()
-    console.log(articles)
+    console.log("Fetched articles")
     res.send(articles)
 })
 
@@ -46,6 +46,13 @@ app.get("/profile:username", (req, res) => {
     console.log("Getting profile of: " + username)
     const profile = userFunctions.getUserByUsername(username)
     res.send({username: profile.username, email: profile.email, password: profile.password, clearance: profile.clearance})
+})
+
+app.get("/article:id", (req, res) => {
+    const id = req.params.id
+    console.log(id)
+    const article = articleFunctions.getArticleById(id)
+    res.send(article)
 })
 
 console.log(`Server listening at port ${port}`);

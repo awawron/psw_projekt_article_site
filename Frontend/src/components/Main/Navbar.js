@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 
 // The navbar is constantly present in the top of the page.
 // It checks the cookie to see if the user is logged in. Then shows the correct button for log in/sign up or Profile respectively
-const Navbar = () => {
+export const Navbar = () => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState('')
@@ -29,13 +29,11 @@ const Navbar = () => {
         axios.get('/logout').then(res => window.alert(res.message))
     }
 
-    const handleLogout = () => {
-        axios.get("/logout")
+    const handleLogout = async () => {
+        await axios.get("/logout")
         setUser(null)
         setIsLoggedIn(false)
-        console.log("Why")
         navigate('/')
-        console.log("You no redirect")
     }
 
     return (
@@ -59,7 +57,7 @@ const Navbar = () => {
                 {isLoggedIn ? (
                     <li className='nav-item'>
                         <Link to={`/profile/${user}`} className="nav-item">{user}</Link>
-                        <Link onClick={handleLogout} className="nav-item">Logout</Link>
+                        <a onClick={handleLogout} className="nav-item">Logout</a>
                     </li>
                 ) : (
                     <li className='nav-item'>

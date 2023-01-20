@@ -16,8 +16,11 @@ exports.getArticles = () => {
 // Returns the article with given id
 exports.getArticleById = (id) => {
     const data = readFile('../data/articles.json');
-    const article = data.find(article => article.id === id);
+    const article = data.find(article => article.id == id);
     
+    if (article == undefined) {
+        return false
+    }
     return article;
 }
 

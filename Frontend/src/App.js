@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile/:username" element={<ProfilePage />} />
-          <Route path="/articles/:id" element={<ArticlePage />} />
+          <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="*" element={<PageNotFound location={useLocation()} />} />
         </Routes>
       </div>

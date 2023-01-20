@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const ArticlePreview = ({ a }) => {
+  const navigate = useNavigate()
+
+  const handleArticleClick = () => {
+    navigate(`/article/${a.id}`)
+  }
+
   const checkEmpty = (article) => {
     if (article === {} || article === undefined) {
       return (
@@ -12,7 +18,7 @@ const ArticlePreview = ({ a }) => {
     } else {
       return (
         <div>
-          <h2>{article.title}</h2>
+          <h2 className='clickable-preview' onClick={handleArticleClick}>{article.title}</h2>
           <p>{article.summary}</p>
         </div>
       )

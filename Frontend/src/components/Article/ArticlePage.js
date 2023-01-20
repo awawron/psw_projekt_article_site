@@ -1,14 +1,17 @@
+import axios from "axios";
 import { useEffect, useState } from "react"
 import Navbar from "../Main/Navbar";
 import CommentList from "./CommentList";
 
 const ArticlePage = () => {
-    const [article, setArticle] = useState({});
+    const [article, setArticle] = useState({title: 'Loading...', body: 'Loading...', comments: []});
 
     useEffect(() => {
-        // axios.get(`/articles/${id}`)
-        // .then(res => res.json())
-        // .then(data => setArticle(data));
+        const url = window.location.href.split('/');
+        const id = url[url.length - 1];
+        console.log(id)
+        axios.get(`/article${id}`)
+            .then(res => setArticle(res.data));
     }, []);
 
     return (<div>
