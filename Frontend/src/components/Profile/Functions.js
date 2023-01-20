@@ -2,8 +2,6 @@ import { useContext } from "react";
 
 // These are some helper functions and components for signin/signup and profile page
 
-// This component provides an easy way of creating input fields for handling user data
-
 // This function checks whether there is anything in the given input and updates the error array accordingly
 export function checkEmpty(value, label, errorArr) {
   const errmsg = label + ' too short';

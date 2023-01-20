@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 const HomePage = () => {
     const [articles, setArticles] = useState([])
 
+    // Get articles for the preview table
     useEffect(() => {
         console.log("Go get articles")
         axios.get("/home")

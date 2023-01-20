@@ -11,6 +11,12 @@ export const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState('')
 
+    // TEMPORARY TESTING FUNCTIONALITY
+    const handleDeleteCookie = () => {
+        axios.get('/logout').then(res => window.alert(res.message))
+    }
+
+    // Check the cookie for if the user is logged in. Display the correct buttons.
     useEffect(() => {
         const checkUser = async () => {
             const cook = Cookies.get('user')
@@ -25,10 +31,7 @@ export const Navbar = () => {
         })
     }, []);
 
-    const handleDeleteCookie = () => {
-        axios.get('/logout').then(res => window.alert(res.message))
-    }
-
+    // Send the logout message to the server and set the login variables to nothing before redirecting to home page
     const handleLogout = async () => {
         await axios.get("/logout")
         setUser(null)

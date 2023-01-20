@@ -24,6 +24,7 @@ exports.getArticleById = (id) => {
     return article;
 }
 
+
 exports.removeArticle = (id) => {
     const data = readFile('../data/articles.json');
     new_data = data.filter(article => article.id !== id)
@@ -32,17 +33,4 @@ exports.removeArticle = (id) => {
 
 exports.addArticle = (article) => {
     
-}
-
-// Returns n random existing article ids
-exports.getRandomIds = (n) => {
-    const data = JSON.parse(fs.readFileSync('data.json'));
-    const ids = data.map(item => item.id);
-    const randomIds = [];
-    for (let i = 0; i < n; i++) {
-        const randomIndex = Math.floor(Math.random() * ids.length);
-        randomIds.push(ids[randomIndex]);
-        ids.splice(randomIndex, 1);
-    }
-    return randomIds;
 }

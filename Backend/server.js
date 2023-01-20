@@ -11,6 +11,7 @@ app.use(express.json())
 app.use(cookieParser("secret"));
 const port = 3333;
 
+// Find and send articles for the home page previews
 app.get("/home", (req, res) => {
     const articles = articleFunctions.getArticles()
     console.log("Fetched articles")
@@ -35,12 +36,14 @@ app.post("/login", (req, res) => {
     }    
 });
 
+// Clear the cookie responsible for login
 app.get("/logout", (req, res) => {
     console.log("logout initiated")
     res.clearCookie('user')
     res.send({ message: "Logged out" })
 })
 
+// Find and send the user data by username
 app.get("/profile:username", (req, res) => {
     const username = req.params.username
     console.log("Getting profile of: " + username)
@@ -48,6 +51,7 @@ app.get("/profile:username", (req, res) => {
     res.send({username: profile.username, email: profile.email, password: profile.password, clearance: profile.clearance})
 })
 
+// Find and send the article with given id
 app.get("/article:id", (req, res) => {
     const id = req.params.id
     console.log(id)

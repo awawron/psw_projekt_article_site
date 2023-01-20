@@ -10,6 +10,7 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null)
     const [profile, setProfile] = useState({username: 'Loading...', email: 'Loading...', password: 'Loading...', clearance: 'Loading...'})
 
+    // A helper function that translates numbers into words
     const getClearance = (number) => {
         switch (number) {
             case 0:
@@ -23,6 +24,7 @@ const ProfilePage = () => {
         }
     }
 
+    // Check if the user is logged in and has access to the profile. If yes fetch the profile, if not redirect to the login page.
     useEffect(() => {
         const checkUser = async () => {
             const cook = Cookies.get('user')

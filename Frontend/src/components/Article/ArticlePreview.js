@@ -7,6 +7,7 @@ const ArticlePreview = ({ a }) => {
     navigate(`/article/${a.id}`)
   }
 
+  // Make sure that the article preview exists and display temporary text if it does not
   const checkEmpty = (article) => {
     if (article === {} || article === undefined) {
       return (
