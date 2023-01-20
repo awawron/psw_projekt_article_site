@@ -1,17 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { Link, redirect } from "react-router-dom";
 import Cookies from 'js-cookie'
-
-const logout = () => {
-    axios.get("/logout")
-}
 
 // The navbar is constantly present in the top of the page.
 // It checks the cookie to see if the user is logged in. Then shows the correct button for log in/sign up or Profile respectively
 const Navbar = () => {
+    const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState('')
 
     useEffect(() => {
         const checkUser = async () => {
@@ -19,11 +17,25 @@ const Navbar = () => {
             return cook
         }
 
-        checkUser().then(us => {setUser(us); console.log(us)})
+        checkUser().then(us => {
+            if (us !== undefined) {
+                setUser(us)
+                setIsLoggedIn(true)
+            }
+        })
     }, []);
 
     const handleDeleteCookie = () => {
         axios.get('/logout').then(res => window.alert(res.message))
+    }
+
+    const handleLogout = () => {
+        axios.get("/logout")
+        setUser(null)
+        setIsLoggedIn(false)
+        console.log("Why")
+        navigate('/')
+        console.log("You no redirect")
     }
 
     return (
@@ -46,8 +58,8 @@ const Navbar = () => {
                 </li>
                 {isLoggedIn ? (
                     <li className='nav-item'>
-                        <Link to={`/profile/${user.id}`} className="nav-item">{user.username}</Link>
-                        <Link to={'/'} onClick={logout} className="nav-item">Logout</Link>
+                        <Link to={`/profile/${user}`} className="nav-item">{user}</Link>
+                        <Link onClick={handleLogout} className="nav-item">Logout</Link>
                     </li>
                 ) : (
                     <li className='nav-item'>
