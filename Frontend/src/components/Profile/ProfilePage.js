@@ -7,8 +7,7 @@ import axios from "axios";
 const ProfilePage = () => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null)
-    const [profile, setProfile] = useState({username: 'Loading...', email: 'Loading...', password: 'Loading...', clearance: 'Loading...'})
+    const [profile, setProfile] = useState({})
 
     // A helper function that translates numbers into words
     const getClearance = (number) => {
@@ -20,7 +19,7 @@ const ProfilePage = () => {
             case 2:
                 return "Admin";
             default:
-                return "Loading";
+                return "";
         }
     }
 
@@ -38,9 +37,8 @@ const ProfilePage = () => {
 
         checkUser().then(us => {
             if (us !== undefined) {
-                setUser(us)
                 setIsLoggedIn(true)
-                fetchProfile(us).then(prof => setProfile(prof.data))
+                fetchProfile(us).then(prof => {console.log(prof.data); setProfile(prof.data)})
             }
             else {
                 navigate('/login')
@@ -54,7 +52,7 @@ const ProfilePage = () => {
             <div className="page">
                 {isLoggedIn ? (
                     <div>
-                        <h2>Welcome {user}!</h2>
+                        <h2>Welcome {profile.username}!</h2>
                         <div>
                             <div>Username : {profile.username}</div>
                             <div>Email    : {profile.email}</div>

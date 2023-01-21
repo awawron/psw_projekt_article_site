@@ -13,6 +13,14 @@ exports.getArticles = () => {
     return data
 }
 
+exports.getIds = () => {
+    const data = readFile('../data/articles.json');
+    const ids = data.map(article => article.id)
+    console.log(ids)
+    
+    return ids
+}
+
 // Returns the article with given id
 exports.getArticleById = (id) => {
     const data = readFile('../data/articles.json');

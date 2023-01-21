@@ -17,6 +17,7 @@ export function SignUp() {
   const [error, setError] = useState(defaultErrors);
 
   function handleSignup() {
+    window.alert("Your data is being processed by our employees. This process may take up to 99999999 days. Thank you for your patience!")
     // TODO
     // Handle signup
   }

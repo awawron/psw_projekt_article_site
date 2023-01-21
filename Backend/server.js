@@ -24,7 +24,7 @@ app.post("/login", (req, res) => {
     const { username, password } = req.body;
     const verified = otherFunctions.verifyUser(username, password)
     if(verified === true) {
-        res.cookie('user', username, {
+        res.cookie('user', otherFunctions.hashString(username), {
             maxAge: 1800000, // 30 minutes in milliseconds
             httpOnly: false,
             signed: false // encrypt the cookie
@@ -45,7 +45,7 @@ app.get("/logout", (req, res) => {
 
 // Find and send the user data by username
 app.get("/profile:username", (req, res) => {
-    const username = req.params.username
+    const username = otherFunctions.unHashString(req.params.username)
     console.log("Getting profile of: " + username)
     const profile = userFunctions.getUserByUsername(username)
     res.send({username: profile.username, email: profile.email, password: profile.password, clearance: profile.clearance})

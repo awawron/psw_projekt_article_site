@@ -59,7 +59,7 @@ export const Navbar = () => {
                 </li>
                 {isLoggedIn ? (
                     <li className='nav-item'>
-                        <Link to={`/profile/${user}`} className="nav-item">{user}</Link>
+                        <Link to={`/profile/${user}`} className="nav-item">Profile</Link>
                         <a onClick={handleLogout} className="nav-item">Logout</a>
                     </li>
                 ) : (

@@ -18,6 +18,17 @@ exports.verifyUser = (username, password) => {
     }
 }
 
+// This function and the unHashString() function could be anything and is just a way to show how to make cookies more secure
+exports.hashString = (string) => {
+    const hashed = string.split("").reverse().join("");
+    return hashed;
+}
+
+exports.unHashString = (string) => {
+    const unhashed = string.split("").reverse().join("");
+    return unhashed;
+}
+
 exports.logActivity = (req, res, next) => {
     const log = `[${new Date().toISOString()}] ${req.method} ${req.originalUrl}\n`;
   
