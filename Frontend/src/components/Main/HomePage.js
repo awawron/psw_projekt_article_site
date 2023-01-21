@@ -9,7 +9,7 @@ const HomePage = () => {
     // Get articles for the preview table
     useEffect(() => {
         console.log("Go get articles")
-        axios.get("/home")
+        axios.get("/articles")
             .then(res => {
                 setArticles(res.data)
         })

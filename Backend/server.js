@@ -12,7 +12,7 @@ app.use(otherFunctions.logActivity)
 const port = 3333;
 
 // Find and send articles for the home page previews
-app.get("/home", (req, res) => {
+app.get("/articles", (req, res) => {
     const articles = articleFunctions.getArticles()
     console.log("Fetched articles")
     res.send(articles)

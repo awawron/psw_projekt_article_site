@@ -23,6 +23,10 @@ const ProfilePage = () => {
         }
     }
 
+    const handleTools = () => {
+        navigate('/tools')
+    }
+
     // Check if the user is logged in and has access to the profile. If yes fetch the profile, if not redirect to the login page.
     useEffect(() => {
         const checkUser = async () => {
@@ -38,7 +42,7 @@ const ProfilePage = () => {
         checkUser().then(us => {
             if (us !== undefined) {
                 setIsLoggedIn(true)
-                fetchProfile(us).then(prof => {console.log(prof.data); setProfile(prof.data)})
+                fetchProfile(us).then(prof => {setProfile(prof.data)})
             }
             else {
                 navigate('/login')
@@ -58,6 +62,8 @@ const ProfilePage = () => {
                             <div>Email    : {profile.email}</div>
                             <div>Password : {profile.password}</div>
                             <div>User type: {getClearance(profile.clearance)}</div>
+                            <br />
+                            <button onClick={handleTools}>Tools</button>
                         </div>
                     </div>
                 ) : (
