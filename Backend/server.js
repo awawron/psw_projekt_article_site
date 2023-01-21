@@ -1,14 +1,14 @@
-const authFunctions = require("./functions/authFunctions")
+const otherFunctions = require("./functions/otherFunctions")
 const articleFunctions = require("./functions/articleFunctions")
 const userFunctions = require("./functions/userFunctions")
 
 const express = require("express");
 const cookieParser = require('cookie-parser');
-const { profile } = require("console");
 
 const app = express();
 app.use(express.json())
 app.use(cookieParser("secret"));
+app.use(otherFunctions.logActivity)
 const port = 3333;
 
 // Find and send articles for the home page previews
@@ -22,7 +22,7 @@ app.get("/home", (req, res) => {
 app.post("/login", (req, res) => {
     console.log(req.body)
     const { username, password } = req.body;
-    const verified = authFunctions.verifyUser(username, password)
+    const verified = otherFunctions.verifyUser(username, password)
     if(verified === true) {
         res.cookie('user', username, {
             maxAge: 1800000, // 30 minutes in milliseconds
