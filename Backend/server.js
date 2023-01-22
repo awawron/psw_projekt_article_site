@@ -100,5 +100,12 @@ app.put("/articles", (req, res) => {
     res.send('Article created with an id ' + id)
 })
 
+app.get('/search', (req, res) => {
+    const { query } = req.query;
+    const filteredArticles = articleFunctions.searchArticles(query)
+  
+    res.send(filteredArticles);
+});
+
 console.log(`Server listening at port ${port}`);
 app.listen(port);

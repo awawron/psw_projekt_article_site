@@ -63,3 +63,12 @@ exports.createArticle = (article) => {
 
     return id
 }
+
+exports.searchArticles = (query) => {
+    const data = readFile('../data/articles.json');
+    const filtered = data.filter(article => {
+        return article.title.includes(query) || article.body.includes(query);
+    });
+
+    return filtered
+}
