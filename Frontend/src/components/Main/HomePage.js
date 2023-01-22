@@ -22,18 +22,11 @@ const HomePage = () => {
             <h1>Welcome to ArticleSuperSite!</h1>
             <table className="preview-table">
                 <tbody>
-                    <tr>
-                        <td className="article-preview"><ArticlePreview a={articles[ 1 % articles.length ]}/></td>
-                        <td className="article-preview"><ArticlePreview a={articles[ 2 % articles.length ]}/></td>
-                    </tr>
-                    <tr>
-                        <td className="article-preview"><ArticlePreview a={articles[ 3 % articles.length ]}/></td>
-                        <td className="article-preview"><ArticlePreview a={articles[ 4 % articles.length ]}/></td>
-                    </tr>
-                    <tr>
-                        <td className="article-preview"><ArticlePreview a={articles[ 5 % articles.length ]}/></td>
-                        <td className="article-preview"><ArticlePreview a={articles[ 6 % articles.length ]}/></td>
-                    </tr>
+                    {articles.map(article => {
+                        return (<tr key={article.id} >
+                            <td className="article-preview"><ArticlePreview a={article}/></td>
+                        </tr>)
+                    })}
                 </tbody>
             </table>
         </div>

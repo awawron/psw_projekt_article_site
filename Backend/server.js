@@ -51,12 +51,53 @@ app.get("/profile:username", (req, res) => {
     res.send({username: profile.username, email: profile.email, password: profile.password, clearance: profile.clearance})
 })
 
+// Change password
+app.patch("/profile:username/p", (req, res) => {
+    const username = req.params.username
+    const newpass = req.body.new
+    userFunctions.changePassword(username, newpass)
+    res.send(newpass + "!")
+})
+
+// When user wants to delete their account
+app.delete("/profile:username", (req, res) => {
+    const username = req.params.username
+    userFunctions.deleteUser(username)
+    res.clearCookie('user')
+    res.send({ message: "Deleted" })
+})
+
+// When admin deletes the user
+app.delete("/profile:username/lol", (req, res) => {
+    const username = req.params.username
+    userFunctions.deleteUser(username)
+    res.send({ message: "Deleted" })
+})
+
+// Delete an article
+app.delete("/article:id", (req, res) => {
+    const id = req.params.id
+    articleFunctions.removeArticle(id)
+    console.log('Article ' + id + ' removed')
+    res.send('Article ' + id + ' removed')
+})
+
 // Find and send the article with given id
 app.get("/article:id", (req, res) => {
     const id = req.params.id
     console.log(id)
     const article = articleFunctions.getArticleById(id)
     res.send(article)
+})
+
+app.get("/users", (req, res) => {
+    const users = userFunctions.getUsers()
+    res.send(users)
+})
+
+app.put("/articles", (req, res) => {
+    const id = articleFunctions.createArticle(req.body)
+    res.send('Article created with an id ' + id)
 })
 
 console.log(`Server listening at port ${port}`);

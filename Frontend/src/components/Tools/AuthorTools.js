@@ -1,9 +1,9 @@
 import ArticleList from "./ArticleList"
 
-const AuthorTools = (id) => {
+const AuthorTools = (username) => {
     return (
         <div>
-            <ArticleList id={id} clearance={1}/>
+            <ArticleList userid={username} clearance={1}/>
         </div>
     )
 }

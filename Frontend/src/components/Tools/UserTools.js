@@ -1,37 +1,46 @@
+import axios from "axios"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 
-const UserTools = (profile) => {
-    const [areYouSure, setAreYouSure] = useState(false)
+const UserTools = ({profile}) => {
+    const navigate = useNavigate()
 
-    useEffect(() => {
-        console.log(areYouSure)
-    }, [])
+    const [username, setUsername] = useState('')
+    const [canChangeUsername, setCanChangeUsername] = useState(false)
+    const [password, setPassword] = useState('')
+    const [canChangePassword, setCanChangePassword] = useState(false)
 
-    const changeUsername = () => {
-        // change username
-    }
-
-    const changePassword = () => {
-        // change password
-    }
-
-    const deleteAccount = () => {
-        console.log(areYouSure)
-        if(areYouSure) {
-            // delete account
+    const checkEmpty = (value) => {
+        if (value.length > 0) {
+            return true    
         }
-        else {
-            window.alert("This is irreversible. If you really want to delete your account, press the button again.")
-            setAreYouSure(true)
+        return false
+    }
+
+    const changePassword = async () => {
+        await axios.patch(`/profile${profile.username}/p`, {new: password})
+            .then(res => window.alert("Password successfuly changed to " + res.data))
+    }
+
+    const deleteAccount = async () => {
+        if (window.confirm('This action is irreversible. Are you sure you want to permanently delete your account?'))
+        {
+            await axios.delete(`/profile${profile.username}`).then(window.alert('Account deleted'))
         }
     }
 
     return (
         <div>
-            <h1>This is a placeholder</h1>
-            Change username: <input type={text} /><button onClick={changeUsername}>Save</button><br />
-            Change password: <input type={text} /><button onClick={changePassword}>Save</button><br />
-            <button onClick={deleteAccount}>Delete account</button>
+            Change password: <input type='text' value={password} onChange={(e) => {
+                setPassword(e.target.value)
+                setCanChangePassword(checkEmpty(e.target.value))
+            }} />
+            <button disabled={!canChangePassword} onClick={changePassword}>Save</button><br />
+            
+            <button onClick={() => {
+                deleteAccount()
+                navigate('/')
+                }}>Delete account</button>
         </div>
     )
 }

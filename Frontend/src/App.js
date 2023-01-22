@@ -4,7 +4,7 @@ import HomePage from './components/Main/HomePage';
 import LoginPage from './components/Profile/LoginPage';
 import ProfilePage from './components/Profile/ProfilePage';
 import ArticlePage from './components/Article/ArticlePage';
-import Navbar from './components/Main/Navbar';
+import ToolsPage from './components/Tools/ToolsPage'
 
 const PageNotFound = ({ location }) => (
   <div>
@@ -19,8 +19,9 @@ const App = () => {
           <Route path="/" element={<Navigate to="/home" /> }/>
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile/:username" element={<ProfilePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/article/:id" element={<ArticlePage />} />
+          <Route path="/tools" element={<ToolsPage />} />
           <Route path="*" element={<PageNotFound location={useLocation()} />} />
         </Routes>
       </div>

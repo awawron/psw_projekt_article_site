@@ -48,18 +48,12 @@ export const Navbar = () => {
                 <li className='nav-item'>
                     <Link to={"/"} className="nav-item">Home</Link>
                 </li>
-                <li className='nav-item'>
-                    <form className='search-form'>
-                        <input type="text" placeholder="Search..." className="search-input" />
-                        <button type="submit" className="search-button">Search</button>
-                    </form>
-                </li>
-                <li className='nav-item'>
+                {/* <li className='nav-item'>
                     <button onClick={handleDeleteCookie}>Delete cookie</button>
-                </li>
+                </li> */}
                 {isLoggedIn ? (
                     <li className='nav-item'>
-                        <Link to={`/profile/${user}`} className="nav-item">Profile</Link>
+                        <Link to={`/profile`} className="nav-item">Profile</Link>
                         <a onClick={handleLogout} className="nav-item">Logout</a>
                     </li>
                 ) : (

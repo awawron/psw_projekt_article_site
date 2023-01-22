@@ -1,13 +1,26 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
+import Cookies from "js-cookie";
 import AdminTools from "./AdminTools";
 import AuthorTools from "./AuthorTools";
-import UserTools from "./UserList";
+import UserTools from "./UserTools";
+import Navbar from "../Main/Navbar";
 
 const ToolsPage = () => {
     const navigate = useNavigate()
     const [profile, setProfile] = useState({})
     
+    const handleCreateArticle = () => {
+        const example = {
+            author: profile.username,
+            title: "Example",
+            summary: "Example summary",
+            body: "Example body"
+        }
+        axios.put('/articles', example).then(res => window.location.reload(false))
+    }
+
     useEffect(() => {
         const checkUser = async () => {
             const cook = Cookies.get('user')
@@ -32,21 +45,34 @@ const ToolsPage = () => {
     const correctTools = () => {
         if(profile.clearance === 2) {
             return (<div>
-                <UserTools profile={profile} /><br />
-                <h2>Admin tools</h2><br />
-                <AdminTools id={profile.id}/>
+                <Navbar />
+                <div className="tools">  
+                    <h1>Tools</h1>
+                    <UserTools profile={profile} /><br />
+                    <h2>Admin tools</h2><br />
+                    <AdminTools id={profile.id}/>
+                </div>
             </div>)
         }
         else if (profile.clearance === 1) {
             return (<div>
-                <UserTools profile={profile} /><br />
-                <h2>Author tools</h2><br />
-                <AuthorTools id={profile.id}/>
+                <Navbar />
+                <div className="tools">                
+                    <h1>Tools</h1>
+                    <UserTools profile={profile} /><br />
+                    <h2>Author tools</h2><br />
+                    <button onClick={handleCreateArticle}>Create example article</button>
+                    <AuthorTools id={profile.username}/>
+                </div>
             </div>)
         }
         else {
             return (<div>
-                <UserTools profile={profile} />
+                <Navbar />
+                <div className="tools">  
+                    <h1>Tools</h1>
+                    <UserTools profile={profile} />
+                </div>
             </div>)
         }
     }

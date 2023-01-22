@@ -5,6 +5,10 @@ const readFile = (p) => {
     return JSON.parse(fs.readFileSync(path.resolve(__dirname, p)))
 }
 
+const writeFile = (p, data) => {
+    fs.writeFileSync(path.resolve(__dirname, p), JSON.stringify(data, null, 4));
+}
+
 // These are the functions related to articles and the articles.json file used on the server side
 
 exports.getArticles = () => {
@@ -34,11 +38,28 @@ exports.getArticleById = (id) => {
 
 
 exports.removeArticle = (id) => {
+    console.log('Deleting article ' + id)
     const data = readFile('../data/articles.json');
-    new_data = data.filter(article => article.id !== id)
-    fs.writeFile('articles.json', JSON.stringify(articles))
+    const new_data = data.filter(article => article.id != id)
+    writeFile('../data/articles.json', new_data)
 }
 
-exports.addArticle = (article) => {
-    
+exports.findSmallestNewId = (ids) => {
+    for (let i = 1; i < Number.MAX_SAFE_INTEGER; i++) {
+        if (!ids.includes(i)) {
+            return i
+        }
+    }
+}
+
+exports.createArticle = (article) => {
+    const data = readFile('../data/articles.json');
+    const ids = this.getIds()
+    ids.sort((a, b) => a - b);
+    const id = this.findSmallestNewId(ids)
+    const a = {id: id, ...article, comments: []}
+    data.push(a)
+    writeFile('../data/articles.json', data)
+
+    return id
 }

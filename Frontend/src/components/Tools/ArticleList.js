@@ -1,8 +1,8 @@
-const { default: axios } = require("axios")
-const { useState, useEffect } = require("react")
-const { useNavigate } = require("react-router")
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router"
 
-const ArticleList = (userid, clearance) => {
+const ArticleList = ({userid, clearance}) => {
     const navigate = useNavigate()
     const [articles, setArticles] = useState([])
 
@@ -11,7 +11,7 @@ const ArticleList = (userid, clearance) => {
     }
 
     const handleDelete = async (artid) => {
-        axios.delete(`/articles/${artid}`)
+        axios.delete(`/article${artid}`)
         .then(() => {
             setArticles(articles.filter(article => article.id !== artid));
         });
@@ -26,35 +26,25 @@ const ArticleList = (userid, clearance) => {
         if (clearance === 2) {
             return <button onClick={() => handleDelete(article.id)}>Delete article</button>
         }
-        else if(clearance === 1 && article.id == userid) {
-            return <button onClick={() => handleDelete(article.id)}>Delete article</button>
+        else if(clearance === 1 && article.article.author == userid.id) {
+            return <button onClick={() => handleDelete(article.article.id)}>Delete article</button>
         }
         else {
             return <></>
         }
     }
 
-    // This displays the correct 
-    const byClearance = () => {
-        if (clearance == 2 || clearance == 1) {
-            return (
-                <div className="article-list">
-                    {articles.map(article => (
-                        <div key={article.id}>
-                            id: {article.id} Title: {article.title} Summary: {article.summary}
-                            <button onClick={() => handleGoTo(article.id)}>Go to article</button>
-                            <DeleteButton article={article}/>
-                        </div>
-                    ))}
+    return (
+        <div className="article-list">
+            {articles.map(article => (
+                <div key={article.id}>
+                    id: {article.id} Title: {article.title} Summary: {article.summary}<br />
+                    <button onClick={() => handleGoTo(article.id)}>Go to article</button>
+                    <DeleteButton article={article}/><br /><br />
                 </div>
-            )
-        }
-        else {
-            return;
-        }
-    }
-
-    return byClearance
+            ))}
+        </div>
+    )
 }
 
 export default ArticleList

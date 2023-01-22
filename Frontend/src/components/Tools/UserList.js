@@ -1,12 +1,13 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const UserList = () => {
     const [users, setUsers] = useState([])
 
-    const handleDelete = (usid) => {
-        axios.delete(`/user/${usid}`)
+    const handleDelete = (username) => {
+        axios.delete(`/profile${username}/lol`)
         .then(() => {
-            setUsers(users.filter(user => user.id !== usid));
+            setUsers(users.filter(user => user.username !== username));
         });
     }
 
@@ -19,8 +20,8 @@ const UserList = () => {
         <div className="user-list">
             {users.map(user => (
                 <div key={user.id}>
-                    id: {user.id} Username: {user.username} Email: {user.email}
-                    <button onClick={() => handleDelete(user.id)}>Delete user</button>
+                    id: {user.id} Username: {user.username} Email: {user.email}<br />
+                    <button onClick={() => handleDelete(user.username)}>Delete user</button><br /><br />
                 </div>
             ))}
         </div>
