@@ -51,16 +51,18 @@ export const Navbar = () => {
                 {/* <li className='nav-item'>
                     <button onClick={handleDeleteCookie}>Delete cookie</button>
                 </li> */}
-                {isLoggedIn ? (
-                    <li className='nav-item'>
-                        <Link to={`/profile`} className="nav-item">Profile</Link>
-                        <a onClick={handleLogout} className="nav-item">Logout</a>
-                    </li>
-                ) : (
-                    <li className='nav-item'>
-                        <Link to={'/login'} className="nav-item">Login</Link>
-                    </li>
-                )}
+                <div className='nav-right'>
+                    {isLoggedIn ? (
+                        <li className='nav-item'>
+                            <Link to={`/profile`} className="nav-item">Profile</Link>
+                            <a onClick={handleLogout} className="nav-item">Logout</a>
+                        </li>
+                    ) : (
+                        <li className='nav-item'>
+                            <Link to={'/login'} className="nav-item">Login</Link>
+                        </li>
+                    )}
+                </div>
             </ul>
         </nav>
     );
