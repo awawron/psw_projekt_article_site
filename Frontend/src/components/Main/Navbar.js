@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from 'js-cookie'
 
 // The navbar is constantly present in the top of the page.
@@ -9,12 +9,12 @@ import Cookies from 'js-cookie'
 export const Navbar = () => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState('')
+    // const [user, setUser] = useState('')
 
     // TEMPORARY TESTING FUNCTIONALITY
-    const handleDeleteCookie = () => {
-        axios.get('/logout').then(res => window.alert(res.message))
-    }
+    // const handleDeleteCookie = () => {
+    //     axios.get('/logout').then(res => window.alert(res.message))
+    // }
 
     // Check the cookie for if the user is logged in. Display the correct buttons.
     useEffect(() => {
@@ -25,7 +25,7 @@ export const Navbar = () => {
 
         checkUser().then(us => {
             if (us !== undefined) {
-                setUser(us)
+                // setUser(us)
                 setIsLoggedIn(true)
             }
         })
@@ -34,7 +34,7 @@ export const Navbar = () => {
     // Send the logout message to the server and set the login variables to nothing before redirecting to home page
     const handleLogout = async () => {
         await axios.get("/logout")
-        setUser(null)
+        // setUser(null)
         setIsLoggedIn(false)
         navigate('/')
     }

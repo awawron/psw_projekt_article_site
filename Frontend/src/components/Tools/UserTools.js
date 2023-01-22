@@ -1,12 +1,10 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 
 const UserTools = ({profile}) => {
     const navigate = useNavigate()
 
-    const [username, setUsername] = useState('')
-    const [canChangeUsername, setCanChangeUsername] = useState(false)
     const [password, setPassword] = useState('')
     const [canChangePassword, setCanChangePassword] = useState(false)
 
