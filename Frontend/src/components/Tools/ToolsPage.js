@@ -18,7 +18,7 @@ const ToolsPage = () => {
             summary: "Example summary",
             body: "Example body"
         }
-        axios.put('/articles', example).then(res => window.location.reload(false))
+        axios.post('/articles', example).then(res => window.location.reload(false))
     }
 
     useEffect(() => {

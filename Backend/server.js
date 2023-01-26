@@ -95,7 +95,7 @@ app.get("/users", (req, res) => {
     res.send(users)
 })
 
-app.put("/articles", (req, res) => {
+app.post("/articles", (req, res) => {
     const id = articleFunctions.createArticle(req.body)
     res.send('Article created with an id ' + id)
 })
