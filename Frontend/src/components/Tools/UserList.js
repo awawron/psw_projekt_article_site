@@ -11,6 +11,24 @@ const UserList = () => {
         });
     }
 
+    const handleElevate = (username) => {
+        axios.patch(`profile${username}/plus`)
+            .then((res) => {
+                window.alert(res.data.message)
+                axios.get("/users")
+                .then(res => setUsers(res.data))
+    })
+    }
+
+    const handleDelevate = (username) => {  
+        axios.patch(`profile${username}/minus`)
+            .then((res) => {
+                window.alert(res.data.message)
+                axios.get("/users")
+                .then(res => setUsers(res.data))
+            })
+    }
+
     useEffect(() => {
         axios.get("/users")
             .then(res => setUsers(res.data))
@@ -20,8 +38,10 @@ const UserList = () => {
         <div className="user-list">
             {users.map(user => (
                 <div key={user.id}>
-                    id: {user.id} Username: {user.username} Email: {user.email}<br />
-                    <button onClick={() => handleDelete(user.username)}>Delete user</button><br /><br />
+                    id: {user.id} Username: {user.username} Email: {user.email} Clearance: {user.clearance}<br />
+                    <button onClick={() => handleDelete(user.username)}>Delete user</button>
+                    <button onClick={() => handleElevate(user.username)}>Elevate</button>
+                    <button onClick={() => handleDelevate(user.username)}>Delevate</button><br /><br />
                 </div>
             ))}
         </div>

@@ -4,12 +4,35 @@ const userFunctions = require("./functions/userFunctions")
 
 const express = require("express");
 const cookieParser = require('cookie-parser');
+const http = require('http');
+const WebSocket = require('ws');
 
 const app = express();
 app.use(express.json())
 app.use(cookieParser("secret"));
 app.use(otherFunctions.logActivity)
 const port = 3333;
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+let clients = []
+
+setInterval(() => {
+    const currentTime = new Date().toTimeString();
+  
+    clients.forEach((client) => {
+      client.send(currentTime);
+    });
+  }, 1000);
+  
+  wss.on('connection', (ws) => {
+    clients.push(ws);
+  
+    ws.on('close', () => {
+      clients = clients.filter((client) => client !== ws);
+    });
+  });
 
 // Find and send articles for the home page previews
 app.get("/articles", (req, res) => {
@@ -71,6 +94,12 @@ app.post("/login", (req, res) => {
     }    
 });
 
+app.post("/signup", (req, res) => {
+    const { username, email, password } = req.body;
+    const msg = userFunctions.createUser(username, email, password)
+    res.send({message: msg})
+})
+
 app.post("/articles", (req, res) => {
     const id = articleFunctions.createArticle(req.body)
     res.send('Article created with an id ' + id)
@@ -82,6 +111,18 @@ app.patch("/profile:username/p", (req, res) => {
     const newpass = req.body.new
     userFunctions.changePassword(username, newpass)
     res.send(newpass + "!")
+})
+
+app.patch("/profile:username/plus", (req, res) => {
+    const username = req.params.username
+    const msg = userFunctions.elevateUser(username)
+    res.send({message: msg})
+})
+
+app.patch("/profile:username/minus", (req, res) => {
+    const username = req.params.username
+    const msg = userFunctions.delevateUser(username)
+    res.send({message: msg})
 })
 
 // When user wants to delete their account
@@ -110,4 +151,4 @@ app.delete("/article:id", (req, res) => {
 
 
 console.log(`Server listening at port ${port}`);
-app.listen(port);
+server.listen(port);

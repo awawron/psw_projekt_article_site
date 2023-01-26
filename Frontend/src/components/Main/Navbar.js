@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie'
+import Clock from './Clock';
 
 // The navbar is constantly present in the top of the page.
 // It checks the cookie to see if the user is logged in. Then shows the correct button for log in/sign up or Profile respectively
@@ -47,6 +48,9 @@ export const Navbar = () => {
                 </li>
                 <li className='nav-item'>
                     <Link to={"/"} className="nav-item">Home</Link>
+                </li>
+                <li className='nav-item'>
+                    <Clock />
                 </li>
                 {/* <li className='nav-item'>
                     <button onClick={handleDeleteCookie}>Delete cookie</button>

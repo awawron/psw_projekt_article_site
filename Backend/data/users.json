@@ -40,5 +40,19 @@
         "email": "admin1@email.com",
         "password": "1234",
         "clearance": 2
+    },
+    {
+        "id": 4,
+        "username": "a",
+        "email": "a@b.pl",
+        "password": "a",
+        "clearance": 0
+    },
+    {
+        "id": 5,
+        "username": "c",
+        "email": "c@c.pl",
+        "password": "c",
+        "clearance": 0
     }
 ]

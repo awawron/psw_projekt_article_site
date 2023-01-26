@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path')
+const otherFunctions = require("./otherFunctions")
 
 const readFile = (p) => {
     return JSON.parse(fs.readFileSync(path.resolve(__dirname, p)))
@@ -44,19 +45,13 @@ exports.removeArticle = (id) => {
     writeFile('../data/articles.json', new_data)
 }
 
-exports.findSmallestNewId = (ids) => {
-    for (let i = 1; i < Number.MAX_SAFE_INTEGER; i++) {
-        if (!ids.includes(i)) {
-            return i
-        }
-    }
-}
+
 
 exports.createArticle = (article) => {
     const data = readFile('../data/articles.json');
     const ids = this.getIds()
     ids.sort((a, b) => a - b);
-    const id = this.findSmallestNewId(ids)
+    const id = otherFunctions.findSmallestNewId(ids)
     const a = {id: id, ...article, comments: []}
     data.push(a)
     writeFile('../data/articles.json', data)

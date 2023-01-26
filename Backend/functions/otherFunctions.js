@@ -40,3 +40,11 @@ exports.logActivity = (req, res, next) => {
 
     next()
 }
+
+exports.findSmallestNewId = (ids) => {
+    for (let i = 1; i < Number.MAX_SAFE_INTEGER; i++) {
+        if (!ids.includes(i)) {
+            return i
+        }
+    }
+}

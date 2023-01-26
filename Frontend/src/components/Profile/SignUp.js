@@ -1,11 +1,15 @@
 import React from 'react';
 import { createContext, useState, useContext } from 'react';
+import { useNavigate } from 'react-router';
 import { checkEmpty, checkEmail } from './Functions.js';
+import axios from "axios";
 
 // This context contains errors for all the inputs
 export const ErrorContext = createContext([]);
 
 export function SignUp() {
+  const navigate = useNavigate()
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +21,16 @@ export function SignUp() {
   const [error, setError] = useState(defaultErrors);
 
   function handleSignup() {
-    window.alert("Your data is being processed by our employees. This process may take up to 99999999 days. Thank you for your patience!")
-    // TODO
-    // Handle signup
+    axios.post("/signup", { username, email, password })
+      .then(res => {
+        if(res.data.message === 'Signup successful') {
+          window.alert("Signed up")
+          navigate('/login')
+        }
+        else {
+          window.alert(res.data.message)
+        }
+    })
   }
 
   const canLogin = error.length === 0;
