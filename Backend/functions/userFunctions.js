@@ -87,6 +87,7 @@ exports.elevateUser = (username) => {
     if(user) {
         if(user.clearance < 3) {
             user.clearance += 1
+            writeFile('../data/users.json', data)
             return "Clearance updated"
         }
         else {
@@ -95,7 +96,7 @@ exports.elevateUser = (username) => {
     }
 }
 
-exports.elevateUser = (username) => {
+exports.delevateUser = (username) => {
     const data = readFile('../data/users.json');
     const user = data.find(user => user.username === username);
     if(user) {

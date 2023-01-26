@@ -4,7 +4,7 @@
         "username": "normaluser1",
         "email": "user1@email.com",
         "password": "safepassword1",
-        "clearance": 0
+        "clearance": 2
     },
     {
         "id": 2,
